@@ -10,18 +10,23 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class MemberRepositoryTest {
-
+    Member m1, m2;
     @Autowired
     MemberRepository memberRepository;
 
     @BeforeEach
     void setUp() {
-        memberRepository.save(new Member("xxx", "xxx@a.dk", "test123", "Dorit","xxx","asdasd","ababa",2200));
-        memberRepository.save(new Member("yyy", "yyy@a.dk", "test123", "Stuart","yyyx","asdasd","ababa",2200));
+       m1 = memberRepository.save(new Member("xxx", "xxx@a.dk", "test123", "Dorit","xxx","asdasd","ababa",2200));
+       m2 = memberRepository.save(new Member("yyy", "yyy@a.dk", "test123", "Stuart","yyyx","asdasd","ababa",2200));
     }
 
     @Test
     void testCount(){
         assertEquals(2,memberRepository.count());
+    }
+
+    @Test
+    void testTimeStamp(){
+        assertNull(m1.getDateCreated());
     }
 }

@@ -12,10 +12,15 @@ import java.time.LocalDateTime;
 @DiscriminatorValue("MEMBER")
 public class Member extends BaseUser {
 
+    @Column(name = "fornavn")
     private String firstName;
+    @Column(name = "efternavn")
     private String lastName;
+    @Column(name = "vejnavn")
     private String street;
+    @Column(name = "bynavn")
     private String city;
+    @Column(name = "postnummer")
     private int zip;
     private boolean approved;
     private int ranking;
@@ -38,8 +43,9 @@ public class Member extends BaseUser {
         this.street = street;
         this.city = city;
         this.zip = zip;
-        //this.approved = false;
-        //this.ranking = 0;
+        this.approved = false;
+        this.ranking = 0;
+
     }
 
     public String getFirstName() {
@@ -70,5 +76,19 @@ public class Member extends BaseUser {
         return ranking;
     }
 
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated = dateCreated;
+    }
 
+    public void setDateEdited(LocalDateTime dateEdited) {
+        this.dateEdited = dateEdited;
+    }
+
+    public LocalDateTime getDateCreated() {
+        return dateCreated;
+    }
+
+    public LocalDateTime getDateEdited() {
+        return dateEdited;
+    }
 }
