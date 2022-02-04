@@ -1,6 +1,7 @@
 package kea.sem3.jwtdemo.configuration;
 
 import kea.sem3.jwtdemo.entity.*;
+import kea.sem3.jwtdemo.repositories.CarRepository;
 import kea.sem3.jwtdemo.repositories.MemberRepository;
 import kea.sem3.jwtdemo.security.UserRepository;
 import org.springframework.boot.ApplicationArguments;
@@ -18,10 +19,12 @@ public class MakeTestData implements ApplicationRunner {
 
     UserRepository userRepository;
     MemberRepository memberRepository;
+    CarRepository carRepository;
 
-    public MakeTestData(UserRepository userRepository, MemberRepository memberRepository) {
+    public MakeTestData(UserRepository userRepository, MemberRepository memberRepository, CarRepository carRepository) {
         this.userRepository = userRepository;
         this.memberRepository = memberRepository;
+        this.carRepository = carRepository;
     }
 
     public  void makePlainUsers(){
@@ -38,9 +41,9 @@ public class MakeTestData implements ApplicationRunner {
         userRepository.save(admin);
         userRepository.save(both);
 
-        Member m1 = new Member("xxx","xxx@a.dk","test123","Mark");
-        m1.addRole(Role.USER);
-        memberRepository.save(m1);
+        //Member m1 = new Member("xxx","xxx@a.dk","test123","Mark","Hansen","xxx","yyyy",2200);
+        //m1.addRole(Role.USER);
+        //memberRepository.save(m1);
 
         System.out.println("########################################################################################");
         System.out.println("########################################################################################");
@@ -54,6 +57,15 @@ public class MakeTestData implements ApplicationRunner {
 
     }
 
+    public void makeCars(){
+        Car car1 = new Car("Brand1","model1",200);
+        Car car2 = new Car("Brand2","model2",250);
+
+        carRepository.save(car1);
+        carRepository.save(car2);
+
+    }
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
@@ -61,6 +73,6 @@ public class MakeTestData implements ApplicationRunner {
 
         makePlainUsers();
 
-
+        
     }
 }
