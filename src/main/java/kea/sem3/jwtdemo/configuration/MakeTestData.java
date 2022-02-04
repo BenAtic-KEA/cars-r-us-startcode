@@ -70,9 +70,9 @@ public class MakeTestData implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         userRepository.deleteAll();
-
+        carRepository.deleteAll();
         makePlainUsers();
+        makeCars();
 
-        
     }
 }
