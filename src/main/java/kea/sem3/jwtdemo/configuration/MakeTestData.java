@@ -57,12 +57,24 @@ public class MakeTestData implements ApplicationRunner {
 
     }
 
+    public void makeMembers(){
+        Member member1 = new Member("memb1", "memb1@mail.dk", "123", "Albert", "Ein", "Street1", "by1", 2200);
+        Member member2 = new Member("memb2", "memb2@mail.dk", "123", "John", "Einst", "Street1", "by2", 2250);
+        Member member3 = new Member("memb3", "memb3@mail.dk", "123", "Wilfred", "EinStein", "Street1", "by3", 2100);
+
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+        memberRepository.save(member3);
+    }
+
     public void makeCars(){
-        Car car1 = new Car("Brand1","model1",200);
-        Car car2 = new Car("Brand2","model2",250);
+        Car car1 = new Car("Brand1","model1",200,20);
+        Car car2 = new Car("Brand2","model2",250,20);
+        Car car3 = new Car("Brand2","model2",250,10);
 
         carRepository.save(car1);
         carRepository.save(car2);
+        carRepository.save(car3);
 
     }
 
@@ -73,6 +85,7 @@ public class MakeTestData implements ApplicationRunner {
         carRepository.deleteAll();
         makePlainUsers();
         makeCars();
+        makeMembers();
 
     }
 }

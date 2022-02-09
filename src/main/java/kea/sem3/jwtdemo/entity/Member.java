@@ -25,14 +25,6 @@ public class Member extends BaseUser {
     private boolean approved;
     private int ranking;
 
-    @Column(name="oprettet")
-    @CreationTimestamp
-    private LocalDateTime dateCreated;
-
-    @Column(name = "rettet")
-    @UpdateTimestamp
-    private LocalDateTime dateEdited;
-
 
     public Member() {}
 
@@ -76,19 +68,4 @@ public class Member extends BaseUser {
         return ranking;
     }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public void setDateEdited(LocalDateTime dateEdited) {
-        this.dateEdited = dateEdited;
-    }
-
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public LocalDateTime getDateEdited() {
-        return dateEdited;
-    }
 }

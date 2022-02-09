@@ -3,9 +3,12 @@ package kea.sem3.jwtdemo.entity;
 import kea.sem3.jwtdemo.security.UserWithPassword;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +43,15 @@ public class BaseUser implements UserWithPassword {
    @Column(columnDefinition = "ENUM('USER','ADMIN')")
    @ElementCollection(fetch = FetchType.EAGER)
    @CollectionTable(name="user_role")
+
+
    List<Role> roles = new ArrayList<>();
+
+   @CreationTimestamp
+   private LocalDateTime dateCreated;
+
+   @UpdateTimestamp
+   private LocalDateTime dateEdited;
 
    public BaseUser() {
    }

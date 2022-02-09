@@ -18,11 +18,11 @@ class CarRepositoryTest {
 
     @BeforeAll
     static void setUp(@Autowired CarRepository carRepository) {
-    Car car1 = carRepository.save(new Car("Brand1","model1",123));
+    Car car1 = carRepository.save(new Car("Brand1","model1",123,20));
     carId1 = car1.getId();
-    Car car2 = carRepository.save(new Car("Brand2","model2",111));
+    Car car2 = carRepository.save(new Car("Brand2","model2",111,20));
     carId2 = car2.getId();
-    Car car3 = carRepository.save(new Car("Brand3","model4",123));
+    Car car3 = carRepository.save(new Car("Brand3","model4",123,20));
     carId3 = car3.getId();
 
     }
