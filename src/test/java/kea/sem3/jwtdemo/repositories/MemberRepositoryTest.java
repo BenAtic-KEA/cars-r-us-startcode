@@ -1,6 +1,7 @@
 package kea.sem3.jwtdemo.repositories;
 
 import kea.sem3.jwtdemo.entity.Member;
+import kea.sem3.jwtdemo.repositories.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
