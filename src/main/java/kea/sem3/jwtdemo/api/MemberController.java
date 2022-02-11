@@ -4,10 +4,7 @@ import kea.sem3.jwtdemo.dto.MemberResponse;
 import kea.sem3.jwtdemo.entity.Member;
 import kea.sem3.jwtdemo.service.MemberService;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class MemberController {
      * @return MemberResponse
      */
     @GetMapping("/{username}")
-    public MemberResponse getMember(@RequestParam String username){
+    public MemberResponse getMember(@PathVariable String username){
 
         return memberService.getMember(username,false);
 

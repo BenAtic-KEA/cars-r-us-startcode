@@ -50,7 +50,7 @@ class CarControllerTest {
     }
 
     @Test
-    void getCars() throws Exception {
+    public void testCarById() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/api/cars/" + carFordId)
                         .accept(MediaType.APPLICATION_JSON))
@@ -59,11 +59,7 @@ class CarControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(carFordId))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.model").value("Focus"));
-
     }
-
-    @Test
-    public void testCarById() throws Exception {}
 
     @Test
     public void testAllCars() throws Exception {
