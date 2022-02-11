@@ -29,10 +29,14 @@ public class CarService {
         Car carNew = carRepository.save(new Car(body));
         return new CarResponse(carNew,true);
     }
+    //Admin da de får returneret alle data om redigeret objekt
     public CarResponse editCar(CarRequest body,int id){
-        return null;
+        Car carToEdit = new Car(body);
+        carToEdit.setId(id);
+        return new CarResponse(carRepository.save(carToEdit),true);
     }
+    //Admin
     public void deleteCar(int id) {
-        //return null;
+        carRepository.deleteById(id);
     }
 }
