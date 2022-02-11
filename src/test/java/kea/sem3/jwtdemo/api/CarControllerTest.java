@@ -34,7 +34,6 @@ class CarControllerTest {
     @Autowired
     CarRepository carRepository;
 
-    //Do something here
     @Autowired
     MockMvc mockMvc;
 
@@ -44,7 +43,7 @@ class CarControllerTest {
     static int carFordId, carSuzukiId;
 
     @BeforeEach
-    public void setup() throws Exception {
+    public void setup(){
         carRepository.deleteAll();
         carFordId = carRepository.save(new Car("Ford", "Focus", 400, 10)).getId();
         carSuzukiId = carRepository.save(new Car("Suzuki", "Vitara", 500, 14)).getId();

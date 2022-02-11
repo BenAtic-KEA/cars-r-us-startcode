@@ -24,7 +24,6 @@ class CarServiceMockitoTest {
     @Mock
     CarRepository carRepository;
 
-    @Autowired
     CarService carService;
 
     @BeforeEach

@@ -16,24 +16,50 @@ public class CarController {
         this.carService = carService;
     }
 
+    /**
+     * USER view, some data are hidden
+     * @return list of all cars in DB
+     */
     @GetMapping
     public List<CarResponse> getCars(){
         return carService.getCars();
     }
 
+    /**
+     * USER view, some data are hidden
+     * @param id carId
+     * @return Returns a Specific car
+     */
     @GetMapping("/{id}")
-    public CarResponse getCar(@PathVariable int id) throws Exception {
+    public CarResponse getCar(@PathVariable int id){
         return carService.getCar(id,false);
     }
+
+    /**
+     * ADMIN function, able to add new cars
+     * @param body CarRequest Object
+     * @return the added car as a CarResponse
+     */
     @PostMapping
     public CarResponse addCar(@RequestBody CarRequest body){
         return carService.addCar(body);
     }
 
+    /**
+     * ADMIN function, update Car
+     * @param body updated object
+     * @param id car to update
+     * @return Updated car object
+     */
+
     @PutMapping("/{id}")
     public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id) {
         return carService.editCar(body,id);}
 
+    /**
+     * ADMIN function, delete Car
+     * @param id car to delete
+     */
     @DeleteMapping("/{id}")
     public void deleteCar(@PathVariable int id){
         carService.deleteCar(id);

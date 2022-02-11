@@ -21,7 +21,7 @@ public class CarService {
         return CarResponse.getCarsFromEntities(carRepository.findAll());
     }
 
-    public CarResponse getCar(int id,boolean all) throws Exception {
+    public CarResponse getCar(int id,boolean all){
         return new CarResponse(carRepository.findById(id).orElseThrow(()-> new Client4xxException("no car with this ID exist")),all);
     }
 
