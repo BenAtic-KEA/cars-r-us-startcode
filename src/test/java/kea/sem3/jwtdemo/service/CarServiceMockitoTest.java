@@ -29,8 +29,8 @@ class CarServiceMockitoTest {
 
     @BeforeEach
     void setUp() {
+        carRepository.deleteAll();
         carService = new CarService(carRepository);
-
     }
 
     @Test
