@@ -45,6 +45,7 @@ class CarControllerTest {
 
     @BeforeEach
     public void setup() throws Exception {
+        carRepository.deleteAll();
         carFordId = carRepository.save(new Car("Ford", "Focus", 400, 10)).getId();
         carSuzukiId = carRepository.save(new Car("Suzuki", "Vitara", 500, 14)).getId();
     }
@@ -84,7 +85,7 @@ class CarControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(containsString("Vitara")));
 
     }
-/*
+
     @Test
     public void testAddCar() throws Exception {
         CarRequest newCar = new CarRequest("WW", "Polo", 200, 10);
@@ -101,22 +102,7 @@ class CarControllerTest {
 
     }
 
- */
-
-
-        /*
-        mockMvc.perform(post("/api/cars")
-                .contentType("application/json")
-                .accept("application/json")
-                .content(objectMapper.writeValueAsString(newCar)))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").exists());
-
-        CarResponse carResponse = carRepository.findById(carFordId).orElseThrow(()-> new Exception("Not found"));
-
-         */
-
-    // @Test
+    //@Test
     public void editCar() throws Exception {
         //New price and discount for the ford
         CarRequest carToEdit = new CarRequest("Ford", "Focus", 500, 20);
@@ -130,8 +116,8 @@ class CarControllerTest {
         assertEquals(500, editedCarFromDB.getPricePrDay());
         assertEquals(20, editedCarFromDB.getBestDiscount());
     }
-/*
-    @Test
+
+    //@Test
     void deleteCar() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/cars/" + carFordId))
                 .andExpect(status().isOk());
@@ -139,6 +125,5 @@ class CarControllerTest {
         assertEquals(1, carRepository.count());
     }
 
- */
 
 }
