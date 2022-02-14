@@ -1,12 +1,16 @@
 package kea.sem3.jwtdemo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("MEMBER")
@@ -24,6 +28,10 @@ public class Member extends BaseUser {
     private int zip;
     private boolean approved;
     private int ranking;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "member")
+    private Set<Reservation> reservations = new HashSet<>();
 
 
     public Member() {}

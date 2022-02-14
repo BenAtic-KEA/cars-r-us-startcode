@@ -17,8 +17,8 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public List<CarResponse> getCars(){
-        return CarResponse.getCarsFromEntities(carRepository.findAll());
+    public List<CarResponse> getCars(boolean includeAll){
+        return CarResponse.getCarsFromEntities(carRepository.findAll(),includeAll);
     }
 
     public CarResponse getCar(int id,boolean all){
@@ -39,4 +39,5 @@ public class CarService {
     public void deleteCar(int id) {
         carRepository.deleteById(id);
     }
+
 }

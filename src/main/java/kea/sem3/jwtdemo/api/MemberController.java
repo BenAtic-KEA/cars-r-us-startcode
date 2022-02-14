@@ -36,8 +36,6 @@ public class MemberController {
     public MemberResponse getMember(@PathVariable String username){
 
         return memberService.getMember(username,false);
-
-
     }
 
 

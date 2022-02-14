@@ -44,9 +44,9 @@ import java.util.stream.Collectors;
             }
         }
 
-        public static List<CarResponse> getCarsFromEntities(List<Car> cars){
+        public static List<CarResponse> getCarsFromEntities(List<Car> cars, boolean includeAll){
             //We will do this together
-            return cars.stream().map(car -> new CarResponse(car,false)).collect(Collectors.toList());
+            return cars.stream().map(car -> new CarResponse(car,includeAll)).collect(Collectors.toList());
         }
 
 }

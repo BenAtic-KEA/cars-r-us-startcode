@@ -40,7 +40,7 @@ class CarServiceInMemoryTest{
 
     @Test
     void getCars() {
-        List<CarResponse> carResponses = carService.getCars();
+        List<CarResponse> carResponses = carService.getCars(false);
         assertEquals(2,carResponses.size());
         assertInstanceOf(CarResponse.class,carResponses.get(0));
         assertThat(carResponses, containsInAnyOrder(hasProperty("model", is("C40")), hasProperty("model", is("Up"))));

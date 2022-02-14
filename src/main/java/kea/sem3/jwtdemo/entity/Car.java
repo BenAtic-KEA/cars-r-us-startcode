@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Car {
@@ -23,6 +25,9 @@ public class Car {
 
     @UpdateTimestamp
     LocalDateTime edited;
+
+    @OneToMany(mappedBy = "car")
+    Set<Reservation> reservations = new HashSet<>();
 
     public Car() {}
 

@@ -38,7 +38,7 @@ class CarServiceMockitoTest {
                 new Car("VOLVO","V70",100,10),
                 new Car("WW","Polo",100,10)
         ));
-        List<CarResponse> cars = carService.getCars();
+        List<CarResponse> cars = carService.getCars(false);
         assertEquals(2,cars.size());
     }
 

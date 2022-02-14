@@ -22,7 +22,16 @@ public class CarController {
      */
     @GetMapping
     public List<CarResponse> getCars(){
-        return carService.getCars();
+        return carService.getCars(false);
+    }
+
+    /**
+     * Admin view
+     * @return view with all info
+     */
+    @GetMapping("/admin")
+    public List<CarResponse> getFullCarList(){
+        return carService.getCars(true);
     }
 
     /**
@@ -34,6 +43,7 @@ public class CarController {
     public CarResponse getCar(@PathVariable int id){
         return carService.getCar(id,false);
     }
+
 
     /**
      * ADMIN function, able to add new cars
