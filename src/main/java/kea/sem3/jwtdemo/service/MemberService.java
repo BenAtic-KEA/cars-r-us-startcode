@@ -1,6 +1,8 @@
 package kea.sem3.jwtdemo.service;
 
+import kea.sem3.jwtdemo.dto.MemberRequest;
 import kea.sem3.jwtdemo.dto.MemberResponse;
+import kea.sem3.jwtdemo.entity.Member;
 import kea.sem3.jwtdemo.error.Client4xxException;
 import kea.sem3.jwtdemo.repositories.MemberRepository;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,12 @@ public class MemberService {
 
     public MemberResponse getMember(String username, boolean all) {
         return new MemberResponse(memberRepository.findById(username).orElseThrow(()-> new Client4xxException("username doesn't exist")),all);
+
+    }
+
+    public MemberResponse addMember(MemberRequest body) {
+        Member newMember = memberRepository.save(new Member(body));
+        return new MemberResponse(newMember, false);
 
     }
 }

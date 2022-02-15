@@ -24,8 +24,8 @@ public class MemberResponse {
     private String street;
     private String city;
     private int zip;
-    private boolean approved;
-    private int ranking;
+    private Boolean approved;
+    private Integer ranking;
 
 public MemberResponse(Member member, boolean includeAll){
     this.username = member.getUsername();

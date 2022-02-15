@@ -1,5 +1,6 @@
 package kea.sem3.jwtdemo.api;
 
+import kea.sem3.jwtdemo.dto.MemberRequest;
 import kea.sem3.jwtdemo.dto.MemberResponse;
 import kea.sem3.jwtdemo.entity.Member;
 import kea.sem3.jwtdemo.service.MemberService;
@@ -36,6 +37,11 @@ public class MemberController {
     public MemberResponse getMember(@PathVariable String username){
 
         return memberService.getMember(username,false);
+    }
+
+    @PostMapping
+    public MemberResponse addMember(@RequestBody MemberRequest body){
+        return memberService.addMember(body);
     }
 
 
