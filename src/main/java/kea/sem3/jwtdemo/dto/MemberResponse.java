@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Column;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,9 @@ public class MemberResponse {
     private int zip;
     private Boolean approved;
     private Integer ranking;
+    private LocalDateTime created;
+    private LocalDateTime dateEdited;
+
 
 public MemberResponse(Member member, boolean includeAll){
     this.username = member.getUsername();
@@ -37,6 +41,8 @@ public MemberResponse(Member member, boolean includeAll){
     this.zip = member.getZip();
 
     if(includeAll){
+        this.created = member.getDateCreated();
+        this.dateEdited = member.getDateEdited();
         this.approved = member.isApproved();
         this.ranking = member.getRanking();
     }

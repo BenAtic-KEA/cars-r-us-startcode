@@ -28,6 +28,11 @@ public class MemberService {
     }
 
     public MemberResponse addMember(MemberRequest body) {
+
+        if(memberRepository.existsById(body.getUsername())){
+            throw new Client4xxException("username is taken");
+        }
+
         Member newMember = memberRepository.save(new Member(body));
         return new MemberResponse(newMember, false);
 
