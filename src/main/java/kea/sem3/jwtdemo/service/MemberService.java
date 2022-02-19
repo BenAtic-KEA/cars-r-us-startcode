@@ -37,4 +37,20 @@ public class MemberService {
         return new MemberResponse(newMember, false);
 
     }
+
+    public MemberResponse updateEmail(String username, String newMail) {
+        Member memberToEdit = memberRepository.findById(username).orElseThrow(()-> new Client4xxException("Username doesnt exists"));
+        memberToEdit.setEmail(newMail);
+        return new MemberResponse(memberRepository.save(memberToEdit),true);
+    }
+
+    public MemberResponse editMember(String username, MemberRequest body) {
+        Member member = new Member(body);
+        member.setUsername(username);
+        return new MemberResponse(memberRepository.save(member),true);
+    }
+
+    public void deleteMember(String username) {
+        memberRepository.deleteById(username);
+    }
 }

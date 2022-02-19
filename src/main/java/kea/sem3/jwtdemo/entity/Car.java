@@ -26,8 +26,8 @@ public class Car {
     @UpdateTimestamp
     LocalDateTime edited;
 
-    @OneToMany(mappedBy = "car")
-    Set<Reservation> reservations = new HashSet<>();
+    @OneToMany(mappedBy = "reservedCar", fetch = FetchType.EAGER)
+    private Set<Reservation> reservations = new HashSet<>();
 
     public Car() {}
 
@@ -45,6 +45,9 @@ public class Car {
         this.bestDiscount = body.getBestDiscount();
     }
 
+    public void addReservation(Reservation res){
+        reservations.add(res);
+    }
     public int getId() {
         return id;
     }

@@ -1,5 +1,7 @@
 package kea.sem3.jwtdemo.service;
 
+import kea.sem3.jwtdemo.dto.CarRequest;
+import kea.sem3.jwtdemo.dto.MemberRequest;
 import kea.sem3.jwtdemo.dto.MemberResponse;
 import kea.sem3.jwtdemo.entity.Member;
 import kea.sem3.jwtdemo.repositories.MemberRepository;
@@ -12,7 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Optional;
-
+import java.util.OptionalInt;
+import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
@@ -47,4 +50,35 @@ MemberService memberService;
         assertEquals(member.getUsername(), membRes.getUsername());
     }
 
+
+    @Test
+    void testAddMember() {
+        Member member = new Member("test1111","test1@mail.dk","test111","testName1","testLastN1","street1","city1",1111);
+        Mockito.when(memberRepository.save(any(Member.class))).thenReturn(member);
+        MemberResponse membRes = memberService.addMember(new MemberRequest(
+                member.getUsername(),
+                member.getEmail(),
+                member.getPassword(),
+                member.getFirstName(),
+                member.getLastName(),
+                member.getStreet(),
+                member.getCity(),
+                member.getZip()));
+        assertEquals("test1111",membRes.getUsername());
+    }
+
+    @Test
+    void testUpdateEmail() {
+
+
+
+    }
+
+    @Test
+    void testEditMember() {
+    }
+
+    @Test
+    void testDeleteMember() {
+    }
 }

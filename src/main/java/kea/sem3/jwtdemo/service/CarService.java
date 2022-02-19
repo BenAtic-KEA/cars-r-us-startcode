@@ -30,14 +30,23 @@ public class CarService {
         return new CarResponse(carNew,true);
     }
     //Admin da de får returneret alle data om redigeret objekt
-    public CarResponse editCar(CarRequest body,int id){
+    public CarResponse editCar(CarRequest body,int carId){
+        carRepository.findById(carId).orElseThrow(()-> new Client4xxException(("No car with provided ID")));
         Car carToEdit = new Car(body);
-        carToEdit.setId(id);
+        carToEdit.setId(carId);
         return new CarResponse(carRepository.save(carToEdit),true);
     }
     //Admin
     public void deleteCar(int id) {
         carRepository.deleteById(id);
     }
+
+    //Service method for PATCH
+    public CarResponse updatePrice(int carId,double newPricePrDay){
+        Car car = carRepository.findById(carId).orElseThrow(()-> new Client4xxException(("No car with provided ID")));
+        car.setPricePrDay(newPricePrDay);
+        return new CarResponse((carRepository.save(car)),true);
+    }
+
 
 }

@@ -1,9 +1,12 @@
 package kea.sem3.jwtdemo.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kea.sem3.jwtdemo.dto.MemberRequest;
 import kea.sem3.jwtdemo.entity.Member;
 import kea.sem3.jwtdemo.repositories.MemberRepository;
 import kea.sem3.jwtdemo.service.MemberService;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -66,4 +69,19 @@ class MemberControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value(memberId1))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.username").value("xxx"));
     }
+
+    @Test
+    void testAddMember() throws Exception {
+        MemberRequest memberRequest = new MemberRequest("test1","test1@mail.dk","test1234","Mark","Hansen","testvej1","by1",2200);
+
+        mockMvC.perform(MockMvcRequestBuilders.post("/api/members")
+                .contentType("application/json")
+                .accept("application/json")
+                .content(objectMapper.writeValueAsString(memberRequest)))
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username").exists());
+        assertEquals("test1",memberRepository.findById("test1").get().getUsername());
+    }
+
+
 }

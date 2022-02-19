@@ -5,10 +5,7 @@ import kea.sem3.jwtdemo.dto.MemberRequest;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,7 +28,7 @@ public class Member extends BaseUser {
     private int ranking;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "reservedMember", fetch = FetchType.EAGER)
     private Set<Reservation> reservations = new HashSet<>();
 
 
@@ -59,6 +56,10 @@ public class Member extends BaseUser {
         this.zip = body.getZip();
         this.approved = false;
         this.ranking = 0;
+    }
+
+    public void addReservation(Reservation reservation){
+        reservations.add(reservation);
     }
 
     public String getFirstName() {

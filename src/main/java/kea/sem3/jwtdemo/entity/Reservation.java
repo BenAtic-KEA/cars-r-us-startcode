@@ -2,9 +2,10 @@ package kea.sem3.jwtdemo.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Getter
@@ -15,25 +16,28 @@ public class Reservation {
     @Id @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
 
-    LocalDateTime reservationDate;
+    @CreationTimestamp
+    LocalDate reservationDate;
 
-    LocalDateTime rentalDate;
-
-    @ManyToOne
-    @JoinColumn(name = "member_id", referencedColumnName = "username")
-    Member member = new Member();
+    LocalDate rentalDate;
 
     @ManyToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "id")
-    Car car = new Car();
+    //@JoinColumn(name = "member_id", referencedColumnName = "username")
+    Member reservedMember;
+
+    @ManyToOne
+    //@JoinColumn(name = "car_id", referencedColumnName = "id")
+    Car reservedCar;
 
 
     public Reservation() {
     }
 
-    public Reservation(int id, LocalDateTime reservationDate, LocalDateTime rentalDate) {
-        this.id = id;
-        this.reservationDate = reservationDate;
+    public Reservation(LocalDate rentalDate, Car reservatedCar, Member reservedTo) {
         this.rentalDate = rentalDate;
+        this.reservedCar = reservatedCar;
+        this.reservedMember = reservedTo;
+        reservedCar.addReservation(this);
+        reservedMember.addReservation(this);
     }
 }

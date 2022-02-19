@@ -20,5 +20,4 @@ import javax.persistence.Enumerated;
         private double pricePrDay;
         private double bestDiscount;
 
-
     }
