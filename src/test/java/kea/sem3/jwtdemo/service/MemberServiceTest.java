@@ -13,10 +13,13 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
@@ -69,13 +72,31 @@ MemberService memberService;
 
     @Test
     void testUpdateEmail() {
+        Member member = new Member("test1111","test1@mail.dk","test111","testName1","testLastN1","street1","city1",1111);
 
+        Mockito.when(memberRepository.save(any(Member.class))).thenReturn(member);
+        Mockito.when(memberRepository.findById(any(String.class))).thenReturn(Optional.of(member));
 
+        assertEquals("newTest1@mail.dk",memberService.updateEmail("test1111","newTest1@mail.dk").getEmail());
+        assertEquals("newTest1@mail.dk",memberRepository.findById("test1111").get().getEmail());
 
     }
 
     @Test
     void testEditMember() {
+        Member member = new Member("test1111","test1@mail.dk","test111","testName1","testLastN1","street1","city1",1111);
+        MemberRequest membReq = new MemberRequest("test1111","test2@mail.dk","test222","testName2","testLastN2","street2","city2",2222);
+        Mockito.when(memberRepository.save(any(Member.class))).thenReturn(member);
+        Mockito.when(memberRepository.findById(any(String.class))).thenReturn(Optional.of(member));
+
+        MemberResponse membRes = memberService.editMember("test1111",membReq);
+
+        assertEquals(membReq.getEmail(),membRes.getEmail());
+        assertEquals(membReq.getFirstName(),memberRepository.findById("test1111").get().getFirstName());
+        assertEquals(membReq.getLastName(),memberRepository.findById("test1111").get().getLastName());
+        assertEquals(membReq.getStreet(),memberRepository.findById("test1111").get().getStreet());
+        assertEquals(membReq.getCity(),memberRepository.findById("test1111").get().getCity());
+        assertEquals(membReq.getZip(),memberRepository.findById("test1111").get().getZip());
     }
 
     @Test

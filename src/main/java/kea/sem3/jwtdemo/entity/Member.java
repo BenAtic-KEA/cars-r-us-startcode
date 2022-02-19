@@ -2,6 +2,8 @@ package kea.sem3.jwtdemo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import kea.sem3.jwtdemo.dto.MemberRequest;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,6 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @DiscriminatorValue("MEMBER")
 public class Member extends BaseUser {
 

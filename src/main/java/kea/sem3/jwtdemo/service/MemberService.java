@@ -45,8 +45,14 @@ public class MemberService {
     }
 
     public MemberResponse editMember(String username, MemberRequest body) {
-        Member member = new Member(body);
-        member.setUsername(username);
+        Member member = memberRepository.findById(username).orElseThrow(()-> new Client4xxException("username doesnt exist"));
+        member.setEmail(body.getEmail());
+        member.setFirstName(body.getFirstName());
+        member.setLastName(body.getLastName());
+        member.setCity(body.getCity());
+        member.setStreet(body.getStreet());
+        member.setZip(body.getZip());
+
         return new MemberResponse(memberRepository.save(member),true);
     }
 
