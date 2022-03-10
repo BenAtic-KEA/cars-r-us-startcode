@@ -87,16 +87,16 @@ MemberService memberService;
         Member member = new Member("test1111","test1@mail.dk","test111","testName1","testLastN1","street1","city1",1111);
         MemberRequest membReq = new MemberRequest("test1111","test2@mail.dk","test222","testName2","testLastN2","street2","city2",2222);
         Mockito.when(memberRepository.save(any(Member.class))).thenReturn(member);
-        Mockito.when(memberRepository.findById(any(String.class))).thenReturn(Optional.of(member));
+        Mockito.when(memberRepository.findById("test1111")).thenReturn(Optional.of(member));
 
         MemberResponse membRes = memberService.editMember("test1111",membReq);
 
         assertEquals(membReq.getEmail(),membRes.getEmail());
-        assertEquals(membReq.getFirstName(),memberRepository.findById("test1111").get().getFirstName());
-        assertEquals(membReq.getLastName(),memberRepository.findById("test1111").get().getLastName());
-        assertEquals(membReq.getStreet(),memberRepository.findById("test1111").get().getStreet());
-        assertEquals(membReq.getCity(),memberRepository.findById("test1111").get().getCity());
-        assertEquals(membReq.getZip(),memberRepository.findById("test1111").get().getZip());
+        assertEquals(membReq.getFirstName(),membRes.getFirstName());
+        assertEquals(membReq.getLastName(),membRes.getLastName());
+        assertEquals(membReq.getStreet(),membRes.getStreet());
+        assertEquals(membReq.getCity(),membRes.getCity());
+        assertEquals(membReq.getZip(),membRes.getZip());
     }
 
     @Test
