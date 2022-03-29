@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,19 +33,10 @@ public class ValidationHandler extends ResponseEntityExceptionHandler {
                 .stream()
                 .map(err-> err.getField()+": "+err.getDefaultMessage())
                 .collect(Collectors.toList());
-
-        errorBody.put("error", String.join(",",errors));
+        errorBody.put("timestamp",new Date());
+        errorBody.put("error", "validation Error");
+        errorBody.put("message", String.join(",",errors));
         return new ResponseEntity<Object>(errorBody, HttpStatus.BAD_REQUEST);
     }
-
-    @ExceptionHandler(Client4xxException.class)
-    public ResponseEntity<Map<String, String>> handleException(HttpServletRequest request, Client4xxException e) {
-        Map<String, String> errorResponse = new HashMap<>();
-        errorResponse.put("path", request.getRequestURI());
-        errorResponse.put("error", e.getLocalizedMessage());
-        errorResponse.put("status", ""+e.getStatus().value());
-        return new ResponseEntity<>(errorResponse, e.getStatus());
-    }
-
 }
 
