@@ -14,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import javax.annotation.security.RolesAllowed;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasProperty;
@@ -48,6 +51,7 @@ class MemberControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "kurt", password = "xxxxxx", authorities = "ADMIN")
     void getMembers() throws Exception {
         String username = "$[?(@.username == '%s')]";
         mockMvC.perform(MockMvcRequestBuilders.get("/api/members")
@@ -60,6 +64,7 @@ class MemberControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "kurt", password = "xxxxxx", authorities = "ADMIN")
     void testGetMember() throws Exception {
         mockMvC.perform(MockMvcRequestBuilders
                         .get("/api/members/" + memberId1)
@@ -71,6 +76,7 @@ class MemberControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "kurt", password = "xxxxxx", authorities = "ADMIN")
     void testAddMember() throws Exception {
         MemberRequest memberRequest = new MemberRequest("test1","test1@mail.dk","test1234","Mark","Hansen","testvej1","by1",2200);
 

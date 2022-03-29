@@ -5,6 +5,7 @@ import kea.sem3.jwtdemo.dto.CarResponse;
 import kea.sem3.jwtdemo.service.CarService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 
 @CrossOrigin
@@ -52,6 +53,7 @@ public class CarController {
      * @return the added car as a CarResponse
      */
     @PostMapping
+    @RolesAllowed("ADMIN")
     public CarResponse addCar(@RequestBody CarRequest body){
         return carService.addCar(body);
     }
@@ -64,6 +66,7 @@ public class CarController {
      */
 
     @PutMapping("/{id}")
+    @RolesAllowed("ADMIN")
     public CarResponse editCar(@RequestBody CarRequest body, @PathVariable int id) {
         return carService.editCar(body,id);}
 

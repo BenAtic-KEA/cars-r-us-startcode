@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -82,6 +83,7 @@ class CarControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "kurt", password = "xxxxxx", authorities = "ADMIN")
     public void testAddCar() throws Exception {
         CarRequest newCar = new CarRequest("WW", "Polo", 200, 10);
         mockMvc.perform(MockMvcRequestBuilders.post("/api/cars")
@@ -98,6 +100,7 @@ class CarControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "kurt", password = "xxxxxx", authorities = "ADMIN")
     public void editCar() throws Exception {
         //New price and discount for the ford
         CarRequest carToEdit = new CarRequest("Ford", "Focus", 500, 20);
@@ -113,6 +116,7 @@ class CarControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "kurt", password = "xxxxxx", authorities = "ADMIN")
     void deleteCar() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/cars/" + carFordId))
                 .andExpect(status().isOk());
